@@ -16,6 +16,6 @@ confa.add('C', 'C2H5OH', {
   dev: 'elop'
 });
 
-console.log(confa.run());
-console.log(confa.run('dev'));
-console.log(confa.run('prod'));
+console.log(confa.make());
+console.log(confa.make('dev'));
+console.log(confa.make('prod'));

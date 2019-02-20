@@ -17,7 +17,7 @@ module.exports = {
     }
   },
 
-  run(environment = "default") {
+  make(environment = "default") {
     const result = {}
     Object.keys(KEYS).forEach(k => {
       result[k] = KEYS[k][environment] || KEYS[k]['default'];
