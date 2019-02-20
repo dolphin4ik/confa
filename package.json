@@ -1,7 +1,7 @@
 {
   "name": "confa",
-  "version": "0.1.0",
-  "description": "environment dependent config",
+  "version": "1.0.0",
+  "description": "Simple environment-dependent config tool",
   "main": "index.js",
   "scripts": {
     "test": "ava test.js"
