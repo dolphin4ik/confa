@@ -1,21 +1,52 @@
+const test = require('ava');
+const random = require('randomatic');
 const confa = require('./index');
 
-confa.add('var1', 'Value-1', {
-  dev: 'Value-2',
-  prod: 'Value-3'
-});
-confa.add('A', {a: 'a'}, {
-  dev: {a: 'aa'},
-  prod: {a: 'aaa'}
-});
-confa.add('B', 115, {
-  dev: 116,
-  prod: 117
-});
-confa.add('C', 'C2H5OH', {
-  dev: 'elop'
+const foo = () => ({
+  "string": random('Aa0', 5),
+  "number": Number(random('0', 5)),
+  "boolean": !!parseInt(random('?', 1, {chars: '10'})),
+  "object": {
+    "string": random('Aa0', 5),
+    "number": Number(random('0', 5)),
+    "boolean": !!parseInt(random('?', 1, {chars: '10'}))
+  }
 });
 
-console.log(confa.make());
-console.log(confa.make('dev'));
-console.log(confa.make('prod'));
+const TEST = {
+  simple: foo(),
+  states: {
+    alpha: foo(),
+    betta: foo()
+  }
+};
+
+test('Simple default value', t => {
+
+  Object.keys(TEST.simple).forEach(k => {
+    confa.add(k, TEST.simple[k]);
+  });
+
+  t.deepEqual(confa.make(), TEST.simple, 'simple value');
+
+  t.deepEqual(confa.make('alpha'), TEST.simple, 'simple default value with alpha state');
+  t.deepEqual(confa.make('betta'), TEST.simple, 'simple default value with betta state');
+});
+
+test('State values', t => {
+
+  Object.keys(TEST.simple).forEach(k => {
+    confa.add(k, TEST.simple[k]);
+  });
+
+  Object.keys(TEST.states).forEach(k => {
+    Object.keys(TEST.states[k]).forEach(j => {
+      confa.add(j, TEST.simple[j], TEST.states[k]);
+    });
+  });
+
+  t.deepEqual(confa.make(), TEST.simple, 'simple value');
+
+  t.deepEqual(confa.make('alpha'), TEST.states.alpha, 'simple default value with alpha state');
+  t.deepEqual(confa.make('betta'), TEST.states.betta, 'simple default value with betta state');
+});

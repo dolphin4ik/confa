@@ -1,19 +1,19 @@
 const KEYS = {};
 
 module.exports = {
-  add(key, defaultValue, extension = {}) {
+  add(key, value, extension = {}) {
 
     if(typeof key !== 'string') {
       throw new Error(`key must be a String`)
     }
 
-    if(defaultValue === undefined) {
+    if(value === undefined) {
       throw new Error(`default value must be provided`)
     }
 
     KEYS[key] = {
       ...extension,
-      "default": defaultValue
+      "default": value
     }
   },
 
