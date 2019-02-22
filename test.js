@@ -8,12 +8,14 @@ const foo = () => ({
   "boolean": !!parseInt(random('?', 1, {chars: '10'})),
   "null": null,
   "undefined": undefined,
+  "array": [random('Aa0', 5), Number(random('0', 5))],
   "object": {
     "string": random('Aa0', 5),
     "number": Number(random('0', 5)),
     "boolean": !!parseInt(random('?', 1, {chars: '10'})),
     "null": null,
-    "undefined": undefined
+    "undefined": undefined,
+    "array": [random('Aa0', 5), Number(random('0', 5))]
   }
 });
 
@@ -55,4 +57,28 @@ test('State and default values', t => {
   t.deepEqual(confa.make('alpha'), TEST.states.alpha, 'alpha value on alpha state');
   t.deepEqual(confa.make('betta'), TEST.states.betta, 'betta value on betta state');
   t.deepEqual(confa.make('gamma'), TEST.simple, 'simple default value on unknown state');
+});
+
+test('Predefined environment', t => {
+  const environment = ['alpha', 'betta'][parseInt(random('?', 1, {chars: '10'}))];
+  const confa = Confa(environment);
+
+  Object.keys(TEST.simple).forEach(k => {
+    t.deepEqual(
+      confa.add(k, TEST.simple[k]),
+      TEST.simple[k],
+      'return default value'
+    );
+  });
+
+  Object.keys(TEST.simple).forEach(k => {
+    t.deepEqual(
+      confa.add(k, TEST.simple[k], {
+        alpha: TEST.states.alpha[k],
+        betta: TEST.states.betta[k]
+      }),
+      TEST.states[environment][k],
+      `return ${environment} value`
+    );
+  });
 });
