@@ -6,10 +6,14 @@ const foo = () => ({
   "string": random('Aa0', 5),
   "number": Number(random('0', 5)),
   "boolean": !!parseInt(random('?', 1, {chars: '10'})),
+  "null": null,
+  "undefined": undefined,
   "object": {
     "string": random('Aa0', 5),
     "number": Number(random('0', 5)),
-    "boolean": !!parseInt(random('?', 1, {chars: '10'}))
+    "boolean": !!parseInt(random('?', 1, {chars: '10'})),
+    "null": null,
+    "undefined": undefined
   }
 });
 

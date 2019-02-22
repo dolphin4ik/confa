@@ -27,6 +27,7 @@ confa.make('banana'); // { key: 'value', another_key: 'default_value' }
 
 ## .add(key, value, [extension])
 Just add any value (number, string, boolean, object) to a key
+
 .add(**key**, **value**, [extension])
 
 **extension** allows you to return the **dependent** value
@@ -34,5 +35,7 @@ Just add any value (number, string, boolean, object) to a key
 ## .make(env)
 
 Returns the specific {key: value} **object** basing on the environment or state
+
 .make() -> default values
+
 .make('special') -> special values
