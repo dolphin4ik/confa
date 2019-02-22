@@ -51,3 +51,5 @@ Returns the specific {key: value} **object** basing on the environment or state
 .make() -> default values
 
 .make('special') -> special values
+
+**Make JSON config great again**
