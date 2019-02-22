@@ -9,7 +9,7 @@ Make your own env-based config easy.
 
 ```javascript
 const Confa = require('confa');
-confa = Confa();
+const confa = Confa();
 
 confa.add('key', 'value');
 confa.add('another_key', 'default_value', {
