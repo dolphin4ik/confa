@@ -1,10 +1,14 @@
 {
   "name": "confa",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple environment-dependent config tool",
   "main": "index.js",
   "scripts": {
     "test": "ava test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dolphin4ik/confa.git"
   },
   "keywords": [
     "confa",
